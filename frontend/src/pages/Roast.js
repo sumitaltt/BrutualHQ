@@ -9,11 +9,11 @@ const Roast = () => {
   const [error, setError] = useState('');
   // Roast mode dropdown state
   const roastModes = [
-    { id: 'roast2', label: ' Roast 2.0' },
-    { id: 'badchick', label: ' Bad Chick' },
-    { id: 'unhinged', label: ' Unhinged' },
-    { id: 'smartass', label: ' Smartass' },
-    { id: 'clown', label: ' Clown Mode' }
+    { id: 'roast2', label: '🔥 Roast 2.0' },
+    { id: 'badchick', label: '💅 Bad Chick' },
+    { id: 'unhinged', label: '🔞 Unhinged' },
+    { id: 'smartass', label: '🧠 Smartass' },
+    { id: 'clown', label: '🤡 Clown Mode' }
   ];
   const [selectedMode, setSelectedMode] = useState(roastModes[0].id);
   const [modeOpen, setModeOpen] = useState(false);
@@ -45,60 +45,48 @@ const Roast = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-6" style={{ background: 'var(--bg)', color: 'var(--text)' }}>
+    <div className="min-h-screen py-20 px-6 bg-white text-slate-900">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-extrabold mb-2">Get Roasted</h1>
-          <p className="text-lg" style={{ color: 'var(--muted-text)' }}>Tell us a few facts and we&apos;ll return a short, savage roast.</p>
+          <p className="text-lg text-slate-600">Tell us a few facts and we&apos;ll return a short, savage roast.</p>
         </div>
 
-  <div className="rounded-xl p-6 shadow-lg mb-6" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+        <div className="bg-slate-900/80 backdrop-blur-md rounded-xl p-6 shadow-lg mb-6 border border-slate-700">
           {/* Roast mode selector */}
           <div className="mb-4 flex items-center justify-between gap-4">
-            <div className="text-sm" style={{ color: 'var(--muted-text)' }}>Choose roast mode</div>
+            <div className="text-sm text-slate-300">Choose roast mode</div>
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setModeOpen(!modeOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium border transition"
-                style={{ background: 'var(--surface)', color: 'var(--text)', borderColor: modeOpen ? 'var(--primary)' : 'transparent' }}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 text-sm font-medium border transition"
+                style={{ borderColor: modeOpen ? '#3b82f6' : 'transparent' }}
                 aria-haspopup="listbox"
                 aria-expanded={modeOpen}
               >
                 <span className="whitespace-nowrap">
                   {roastModes.find(m => m.id === selectedMode)?.label}
                 </span>
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--muted-text)' }}>
+                <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {modeOpen && (
-                <ul
-                  role="listbox"
-                  tabIndex={-1}
-                  className="absolute right-0 mt-2 w-56 rounded-lg shadow-lg overflow-hidden z-40"
-                  style={{ background: 'var(--surface)', border: '1px solid var(--border)', outline: 'none' }}
-                >
-                  {roastModes.map((m) => {
-                    const isSelected = m.id === selectedMode;
-                    return (
-                      <li
-                        key={m.id}
-                        role="option"
-                        aria-selected={isSelected}
-                        onClick={() => { setSelectedMode(m.id); setModeOpen(false); }}
-                        className="px-3 py-2 cursor-pointer text-sm"
-                        style={{
-                          color: isSelected ? 'var(--text)' : 'var(--muted-text)',
-                          background: isSelected ? 'var(--bg)' : 'transparent',
-                          borderLeft: isSelected ? '3px solid var(--primary)' : '3px solid transparent'
-                        }}
-                      >
-                        {m.label}
-                      </li>
-                    );
-                  })}
+                <ul role="listbox" tabIndex={-1} className="absolute right-0 mt-2 w-56 bg-slate-800 border rounded-lg shadow-lg overflow-hidden z-40" style={{ borderColor: 'var(--border)' }}>
+                  {roastModes.map((m) => (
+                    <li
+                      key={m.id}
+                      role="option"
+                      aria-selected={m.id === selectedMode}
+                      onClick={() => { setSelectedMode(m.id); setModeOpen(false); }}
+                      className={`px-3 py-2 cursor-pointer text-sm ${m.id === selectedMode ? 'bg-blue-50 text-slate-900' : 'text-slate-300 hover:bg-slate-700'}`}
+                      style={m.id === selectedMode ? { borderLeft: '3px solid #3b82f6' } : {}}
+                    >
+                      {m.label}
+                    </li>
+                  ))}
                 </ul>
               )}
             </div>
@@ -107,30 +95,18 @@ const Roast = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Tell us about yourself — habits, dreams, or anything we can roast you for (be specific for better burns)."
-            className="w-full p-4 bg-transparent rounded-lg resize-none focus:ring-0"
-            style={{ border: '1px solid var(--border)', color: 'var(--text)' }}
+            className="w-full p-4 bg-transparent border border-slate-700 rounded-lg resize-none focus:ring-0 text-white placeholder-gray-400"
             rows="4"
             maxLength="300"
           />
           <div className="flex justify-between items-center mt-4">
-            <span className="text-sm" style={{ color: 'var(--muted-text)' }}>{input.length}/300</span>
+            <span className="text-sm text-gray-400">{input.length}/300</span>
             <div className="flex items-center gap-3">
-              <Link to="/" style={{ fontSize: '0.875rem', color: 'var(--muted-text)', textDecoration: 'none' }} className="hover:underline">Back</Link>
+              <Link to="/" className="text-sm text-slate-300 hover:underline">Back</Link>
               <button
                 onClick={generateRoast}
                 disabled={isLoading || !input.trim()}
-                style={{
-                  padding: '8px 18px',
-                  background: isLoading ? 'var(--muted-button, #6b7280)' : 'linear-gradient(90deg, var(--accent, #fb923c) 0%, var(--primary, #ef4444) 100%)',
-                  color: 'white',
-                  fontWeight: 600,
-                  borderRadius: '10px',
-                  border: 'none',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-                  cursor: isLoading ? 'not-allowed' : 'pointer',
-                  transition: 'transform 120ms ease'
-                }}
-                className="transition-all duration-200"
+                className="px-6 py-2 bg-gradient-to-r from-orange-500 to-rose-500 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-all duration-200 shadow-md"
               >
                 {isLoading ? 'Roasting...' : 'Roast Me!'}
               </button>
