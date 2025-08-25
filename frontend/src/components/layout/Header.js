@@ -29,10 +29,10 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/', alt: 'Go to Home' },
-    { name: 'Generator', href: '/generator', alt: 'Open Generator' },
-  { name: 'Roast Me', href: '/roast', alt: 'Get Roasted' },
-  { name: 'Voice Demotivation', href: '/voice', alt: 'Try Voice Demotivation' },
+    { name: 'RoastMe', href: '/roast', alt: 'Get Roasted' },
     { name: 'Chat', href: '/chat', alt: 'Open Chat' },
+    { name: 'Voice', href: '/voice', alt: 'Open Voice Studio' },
+    { name: 'Demotivation', href: '/generator', alt: 'Open Demotivation' },
     { name: 'Motivation', href: '/motivation', alt: 'Get Motivation' },
   ];
 

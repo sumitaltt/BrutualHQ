@@ -142,17 +142,48 @@ code {
   color: #e6eef8 !important;
 }
 
-/* Make Tailwind utility classes that assume white/light backgrounds display correctly */
-.force-dark .bg-white, .force-dark .bg-white\/80, .force-dark .bg-white\/90, .force-dark .bg-white\/95, .force-dark .bg-white\/70, .force-dark .bg-white\/60, .force-dark .bg-white\/50, .force-dark .bg-white\/30 {
-  background-color: #000 !important;
+/* Theme tokens: default (light) values. Components use these via var(--...) */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --text: #0f172a; /* slate-900 */
+  --muted-text: #6b7280; /* slate-500 */
+  --border: rgba(15,23,42,0.06); /* subtle border */
+  --primary: #6366f1; /* indigo-500 */
+  --accent: #fb7185; /* rose-400 */
+  --card-shadow: 0 10px 30px rgba(2,6,23,0.06);
+  --scrollbar-thumb: rgba(124,58,237,0.5);
 }
 
-.force-dark .text-slate-900, .force-dark .text-gray-900, .force-dark .text-gray-800, .force-dark .text-slate-700, .force-dark .text-gray-700 {
-  color: #e6eef8 !important;
+/* Dark token map (scoped under .force-dark) */
+.force-dark {
+  --bg: #000000;
+  --surface: #020202;
+  --text: #e6eef8;
+  --muted-text: #94a3b8;
+  --border: rgba(255,255,255,0.06);
+  --primary: #6366f1;
+  --accent: #fb7185;
+  --card-shadow: 0 10px 30px rgba(255,255,255,0.02);
+  --scrollbar-thumb: rgba(255,255,255,0.12);
 }
 
-.force-dark .border-slate-100, .force-dark .border-gray-200, .force-dark .border-white\/20, .force-dark .border-white\/30 {
-  border-color: rgba(255,255,255,0.06) !important;
+/* Map common Tailwind utility classes to theme tokens so existing markup becomes theme-aware.
+   :root defines light tokens and `.force-dark` overrides them for dark (all-black) mode. */
+.bg-white, .bg-white\/80, .bg-white\/90, .bg-white\/95, .bg-white\/70, .bg-white\/60, .bg-white\/50, .bg-white\/30 {
+  background-color: var(--surface) !important;
+}
+
+.text-slate-900, .text-gray-900, .text-gray-800, .text-slate-700, .text-gray-700 {
+  color: var(--text) !important;
+}
+
+.text-slate-600, .text-gray-600, .text-slate-500, .text-slate-400 {
+  color: var(--muted-text) !important;
+}
+
+.border-slate-100, .border-gray-200, .border-white\/20, .border-white\/30 {
+  border-color: var(--border) !important;
 }
 
 /* Cards and panels should remain slightly elevated with near-black surface */
